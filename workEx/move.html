@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/animate.css">
+    <title>Document</title>
+    <script src="./js/flexible.js"></script>
+    <script src="./js/less.js"></script>
+    <script src="./js/zepto.js"></script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        /*框架*/
+        
+        body {
+            overflow: hidden;
+        }
+        
+        .page-wrap {
+            overflow: hidden
+        }
+        
+        .page {
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0
+        }
+        
+        .contain {
+            width: 100%;
+            height: 100%;
+            display: none;
+            position: relative;
+            z-index: 0
+        }
+        
+        .current .contain,
+        .slide .contain {
+            display: block
+        }
+        
+        .current {
+            display: block;
+            z-index: 1
+        }
+        
+        .slide {
+            display: block;
+            z-index: 2
+        }
+        
+        .swipe {
+            display: block;
+            z-index: 3;
+            transition-duration: 0ms!important;
+            -webkit-transition-duration: 0ms!important
+        }
+    </style>
+
+</head>
+
+<body>
+    <audio src="http://res1.eqh5.com/8770062197db4cbcae419b4adfb688d5.mp3" autoplay></audio>
+    <div id="pageContain" class="page-wrap">
+        <div class="page page1 current">
+            <div class="contain">
+                <section class="inner_app">
+                    <div class="bg_right zoomIn ">
+                        <img src="./img/right-flower.webp" alt="">
+                    </div>
+                    <div class="bg_left zoomIn">
+                        <img src="./img/left-flower.webp" alt="">
+                    </div>
+                    <span class="header_title">[遇见更好的自己]</span>
+                    <div class="img_box">
+                        <img src="./img/leaf.webp" alt="">
+                    </div>
+                    <div class="img_box1">
+                        <img src="./img/leaf1.webp" alt="">
+                    </div>
+                    <div class="main_box">
+                        <div class="qz_box rollIn">
+                            <div></div>
+                        </div>
+                        <div class="img_box2">
+                            <img src="./img/little-flower.webp" alt="">
+                        </div>
+                        <div class="img_box3">
+                            <img src="./img/little-flower.webp" alt="">
+                        </div>
+                        <div class="img_box4 rotateOut">
+                            <img src="./img/xg.webp" alt="">
+                        </div>
+                        <div class="jl_box">
+                            <div></div>
+                        </div>
+                        <ul class="writing">
+                            <li class="writing-w">文</li>
+                            <li>案</li>
+                            <li>策</li>
+                            <li>划</li>
+                        </ul>
+                        <ul class="name">
+                            <li>姓名</li>
+                            <li>电话</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="page page2">
+            <div class="contain">
+                <section class="inner_app">
+                    <div class="bg_right zoomIn ">
+                        <img src="./img/right-flower.webp" alt="">
+                    </div>
+                    <div class="bg_left zoomIn">
+                        <img src="./img/left-flower.webp" alt="">
+                    </div>
+                    <div>
+                        <h2 class="enter_img "></h2>
+                        <span class="header_title title_gr"> 个人资料</span>
+                    </div>
+                    <div class="img_box">
+                        <img src="./img/leaf.webp" alt="">
+                    </div>
+                    <div class="img_box1">
+                        <img src="./img/leaf1.webp" alt="">
+                    </div>
+                    <div class="main_box">
+                        <h3 class="photo"></h3>
+                        <div class="img_box2">
+                            <img src="./img/little-flower.webp" alt="">
+                        </div>
+                        <div class="img_box3">
+                            <img src="./img/little-flower.webp" alt="">
+                        </div>
+                        <div class="img_box4 rotateOut">
+                            <img src="./img/xg.webp" alt="">
+                        </div>
+                        <ul class="writing_jj">
+                            <li class="writing-base">姓名:雷舒雯</li>
+                            <li>籍贯:黑龙江</li>
+                            <li>学历:硕士</li>
+                            <li>专业:前端</li>
+                        </ul>
+                        <h2 class="enter_img enter_img2"></h2>
+                        <span class="introduce_j">没有经济学思维的程序员是不是好产品经理</span>
+                        <h2 class="enter_img enter_img3"></h2>
+                        <span class="introduce_n">本人性格内外结合，待人真诚。细心、耐心是我的工作态度，对于文字天生敏感，对生活更是充满了希望，对工作充满热情。 两年的工作时间，加班也是让我拥有了三年的工作经验。能在短期间内适应新环境，以及强烈的品质意识；</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="playBtn"></div>
+
+    <script src="./js/fullPage.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        document.ontouchmove = function(e) {
+            e.preventDefault();
+        };
+        var runPage,
+            interval,
+            autoPlay;
+
+        runPage = new FullPage({
+
+            id: 'pageContain', // id of contain
+            slideTime: 800, // time of slide
+            continuous: true, // create an infinite feel with no endpoints
+            effect: { // slide effect
+                transform: {
+                    translate: 'Y', // 'X'|'Y'|'XY'|'none'
+                    scale: [1, 1], // [scalefrom, scaleto]
+                    rotate: [0, 0] // [rotatefrom, rotateto]
+                },
+                opacity: [0, 1] // [opacityfrom, opacityto]
+            },
+            mode: 'wheel,touch', // mode of fullpage
+            easing: 'ease', // easing('ease','ease-in','ease-in-out' or use cubic-bezier like [.33, 1.81, 1, 1] )
+            // callback : function(index, thisPage) {
+
+            //     index = index + 1 > 3 ? 0 : index + 1;
+            //     autoPlay(index);
+            // }
+        });
+
+        interval = setTimeout(function() {
+            runPage.go(runPage.thisPage() + 1);
+        }, 5000);
+    </script>
+</body>
+
+</html>
